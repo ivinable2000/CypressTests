@@ -16,7 +16,7 @@ pipeline {
             steps 
             {
                 echo "remove all reports"
-                sh 'rm -rf reports/*'
+                sh 'rm -rf results/*'
                 sh 'npm install;'                
             }
         }
@@ -49,15 +49,6 @@ pipeline {
                 sh "kill ${pid}"
                 sh 'rm pidlist.txt' 
             }
-            echo 'Generating report'
-            script {
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'reports/allure-results']]
-                ])
-            }
-            }
+        }
     }
 }

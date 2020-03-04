@@ -11,5 +11,9 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^4.0.2"
+  },
+  "dependencies": {
+    "mocha": "^7.1.0",
+    "mocha-allure-reporter": "^1.4.0"
   }
 }
