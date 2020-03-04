@@ -40,8 +40,9 @@ pipeline {
         }
         
     }
-        post{
-            always{
+    post{
+        always{
+            script {
                 echo "cleaning up"
                 sh 'ps -a | grep "start.js" | head -1 > pidlist.txt'
                 pid = sh(returnStdout: true, script: 'awk \'{print $1}\' pidlist.txt | head -1').trim()
@@ -57,5 +58,6 @@ pipeline {
                     results: [[path: 'reports/allure-results']]
                 ])
             }
-        }
+            }
+    }
 }
