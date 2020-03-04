@@ -49,6 +49,11 @@ pipeline {
                 sh "kill ${pid}"
                 sh 'rm pidlist.txt' 
             }
+
+            script{
+                echo "Generating Qtest Reports"
+                submitJUnitTestResultsToqTest([apiKey: '8a9c55cc-3dd0-4906-97c2-148527125dbf', containerID: 321463, containerType: 'release', createTestCaseForEachJUnitTestClass: true, createTestCaseForEachJUnitTestMethod: false, overwriteExistingTestSteps: true, parseTestResultsFromTestingTools: true, parseTestResultsPattern: 'reports/**.xml', projectID: 80017, qtestURL: 'https://fleetcomplete.qtestnet.com/', submitToAReleaseAsSettingFromQtest: true, submitToExistingContainer: false, utilizeTestResultsFromCITool: false])
+            }
         }
     }
 }
