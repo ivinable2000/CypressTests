@@ -38,7 +38,8 @@ pipeline {
                 sh 'npx cypress run --spec cypress/integration/first_step.spec.js '
             }
         }
-
+        
+    }
         post{
             always{
                 echo "cleaning up"
@@ -57,6 +58,4 @@ pipeline {
                 ])
             }
         }
-        
-    }
 }
