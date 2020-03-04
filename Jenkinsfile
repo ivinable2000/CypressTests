@@ -20,6 +20,14 @@ pipeline {
             }
         }
 
+        stage('start application')
+        {
+            steps{
+                echo "starting web application"
+                sh 'cd ~/Downloads/target-app; npm run start'
+            }
+        }
+
 
         stage('run test') 
         {
