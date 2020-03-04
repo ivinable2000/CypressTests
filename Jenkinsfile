@@ -16,6 +16,7 @@ pipeline {
             steps 
             {
                 echo "remove all reports"
+                sh 'rm -rf reports/*'
                 sh 'npm install;'                
             }
         }
@@ -35,6 +36,25 @@ pipeline {
             {
                 echo 'Running tests'
                 sh 'npx cypress run --spec cypress/integration/first_step.spec.js '
+            }
+        }
+
+        post{
+            always{
+                echo "cleaning up"
+                sh 'ps -a | grep "start.js" | head -1 > pidlist.txt'
+                pid = sh(returnStdout: true, script: 'awk \'{print $1}\' pidlist.txt | head -1').trim()
+                sh "kill ${pid}"
+                sh 'rm pidlist.txt' 
+            }
+            echo 'Generating report'
+            script {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'reports/allure-results']]
+                ])
             }
         }
         
