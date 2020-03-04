@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('start application')
+        stage('start react application')
         {
             steps{
                 echo "starting web application"
@@ -34,7 +34,7 @@ pipeline {
             steps 
             {
                 echo 'Running tests'
-                sh 'npx cypress run --spec first_step.spec.js'
+                sh 'npx cypress run --spec cypress/integration/first_step.spec.js '
             }
         }
         
