@@ -24,7 +24,7 @@ pipeline {
         {
             steps{
                 echo "starting web application"
-                sh 'cd ~/Downloads/target-app; npm run start'
+                sh 'cd ~/Downloads/target-app; npm run start > /dev/null 2>&1 &'
             }
         }
 
